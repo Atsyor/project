@@ -1,16 +1,11 @@
-import paho.mqtt.client as mqtt
 from gpiozero import LED, Button
+import paho.mqtt.client as mqtt
 from signal import pause
 from time import sleep
 import urllib2
 
 
-
-led = LED(17)
-button_pressed = Button(2)
-
-client = mqtt.Client()
-client.connect('broker.hivemq.com', 1883, 60)
+led=LED(17)
 
 def dot():
         led.on()
@@ -23,7 +18,7 @@ def dash():
         sleep(3)
         led.off()
         sleep(1)
-
+     
 
 def w():
         dot()
@@ -42,7 +37,7 @@ def r():
         dash()
         dot()
 def e():
-	dash()
+        dash()
         dot()
         dash()
         dot()
@@ -55,58 +50,50 @@ def c():
 
 
 def o():
-        dot()
+	dot()
         dash()
         dot()
+
 def m():
-        dot()
+	dot()
         dash()
         dot()
 
 def i():
-        dot()
+	dot()
         dot()
 
 def n():
-        dash()
+	dash()
         dot()
 
 def g():
-        dash()
+	dash()
         dot()
         dash()
 
 
 def notification():
-	w()
+        w()
         e()
         a()
         r()
         e()
         c()
-        o()
-        m()
-        i()
-        n()
-        g()
-
-
-def button_press():
-	print 'message sent!'
-	client.publish('test/richie', " WOMAN IN LABOUR")
-	urllib2.urlopen("https://maker.ifttt.com/trigger/woman_inlabour/with/key/mth3UwjXe5RsyLclHaatC4562E8gL5JIujqqmn2Q0KH").read()
+	o()
+	m()
+	i()
+	n()
+	g()
 
 def on_message(client, userdata, message):
-        print message.payload
-        notification()
+	print message.payload
+	notification()
 
 def on_connect(client, userdata, flags, code):
-        print "connected:" + str(code)
-        client.subscribe("test/log_out")
-
-
-button_pressed.when_pressed = button_press
-
+	print "connected:" + str(code)
+	client.subscribe("test/log_out")
+	
 client = mqtt.Client()
 client.on_connect = on_connect
 client.on_message = on_message
@@ -115,8 +102,3 @@ client.connect("broker.hivemq.com", 1883, 60)
 
 
 client.loop_forever()
-
-
-
-pause()
-
