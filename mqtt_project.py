@@ -92,7 +92,7 @@ def on_message(client, userdata, message):
 
 def on_connect(client, userdata, flags, code):
         print "connected:" + str(code)
-        client.subscribe("test/all")
+        client.subscribe("test/richie")
 
 
 client = mqtt.Client()
